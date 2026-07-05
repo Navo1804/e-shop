@@ -3,11 +3,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret')
-    # Configuración de la BD
-    SQLALCHEMY_DATABASE_URI = (
-        f"mysql+pymysql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}"
-        f"@{os.getenv('DB_HOST')}/{os.getenv('DB_NAME')}"
+    SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        "DATABASE_URL",
+        "mysql+pymysql://ecommerce_user:123456@127.0.0.1:3306/ecommerce_db"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
