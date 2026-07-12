@@ -1,8 +1,9 @@
 from app import db 
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
-class Usuario(db.Model):
+class Usuario(UserMixin, db.Model):
     __tablename__ = 'usuarios'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
@@ -21,8 +22,9 @@ class Usuario(db.Model):
         self.password = generate_password_hash(password_plano)
 
     def check_password(self, passwd):
+        
         """Compara el texto plano con la contrasena hash """
-        return check_password_hash(passwd)
+        return check_password_hash(self.password, passwd)
     
     def es_admin(self):
         return self.rol == "admin"
